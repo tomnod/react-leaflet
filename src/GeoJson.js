@@ -25,7 +25,7 @@ export default class GeoJson extends Path {
   render() {
     debugger
     if (typeof(this.props.ref) == 'function') {
-      this.props.ref(this.leafletElement);
+      // this.props.ref(this.leafletElement);
     }
     return
   }
