@@ -21,12 +21,4 @@ export default class GeoJson extends Path {
   componentDidUpdate(prevProps) {
     this.setStyleIfChanged(prevProps, this.props);
   }
-
-  render() {
-    debugger
-    if (typeof(this.props.ref) == 'function') {
-      // this.props.ref(this.leafletElement);
-    }
-    return
-  }
 }
