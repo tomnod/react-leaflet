@@ -32,17 +32,25 @@ export default class Map extends MapComponent {
     zoom: PropTypes.number,
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      id: props.id || uniqueId('map'),
-    };
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     id: props.id || uniqueId('map'),
+  //   };
+  // }
+
+  componentWillMount() {
+    this.element = React.createElement('div', {
+      className: this.props.className,
+      style: this.props.style
+    });
+    this.leafletElement = Leaflet.map(this.element, this.props);
   }
 
   componentDidMount() {
-    this.leafletElement = Leaflet.map(this.state.id, this.props);
+    // this.leafletElement = Leaflet.map(this.state.id, this.props);
     super.componentDidMount();
-    this.setState({map: this.leafletElement});
+    // this.setState({map: this.leafletElement});
     if (!isUndefined(this.props.bounds)) {
       this.leafletElement.fitBounds(this.props.bounds, this.props.boundsOptions);
     }
@@ -84,18 +92,10 @@ export default class Map extends MapComponent {
   }
 
   render() {
-    const map = this.leafletElement;
-    const children = map ? React.Children.map(this.props.children, child => {
-      return child ? React.cloneElement(child, {map}) : null;
-    }) : null;
+    this.children = React.Children.map(this.props.children, child => {
+      return React.cloneElement(child, {map: this.leafletElement});
+    });
 
-    return (
-      <div
-        className={this.props.className}
-        id={this.state.id}
-        style={this.props.style}>
-        {children}
-      </div>
-    );
+    return this.element;
   }
 }

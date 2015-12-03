@@ -8,9 +8,9 @@ export default class GeoJson extends Path {
     data: PropTypes.object.isRequired,
   };
 
-  static contextTypes = {
-    map: PropTypes.instanceOf(Map)
-  };
+  // static contextTypes = {
+  //   map: PropTypes.instanceOf(Map)
+  // };
 
   componentWillMount() {
     super.componentWillMount();
