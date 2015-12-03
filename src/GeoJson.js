@@ -1,11 +1,15 @@
 import { PropTypes } from 'react';
-import { geoJson } from 'leaflet';
+import { Map, geoJson } from 'leaflet';
 
 import Path from './Path';
 
 export default class GeoJson extends Path {
   static propTypes = {
     data: PropTypes.object.isRequired,
+  };
+
+  static contextTypes = {
+    map: PropTypes.instanceOf(Map)
   };
 
   componentWillMount() {
@@ -16,5 +20,12 @@ export default class GeoJson extends Path {
 
   componentDidUpdate(prevProps) {
     this.setStyleIfChanged(prevProps, this.props);
+  }
+
+  render() {
+    if (typeof(this.props.ref) == 'function') {
+      this.props.ref(this.leafletElement);
+    }
+    return
   }
 }
