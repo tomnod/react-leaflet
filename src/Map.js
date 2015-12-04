@@ -40,11 +40,14 @@ export default class Map extends MapComponent {
   // }
 
   componentWillMount() {
-    this.element = React.createElement('div', {
-      className: this.props.className,
-      style: this.props.style,
-    });
+    this.element = document.createElement('div');
+    this.updateElementProps();
     this.leafletElement = Leaflet.map(this.element, this.props);
+  }
+
+  updateElementProps() {
+    this.element.style = this.props.style;
+    this.element.className = this.props.className;
   }
 
   componentDidMount() {
