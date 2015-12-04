@@ -2,7 +2,7 @@
 
 import isArray from 'lodash/lang/isArray';
 import isUndefined from 'lodash/lang/isUndefined';
-import uniqueId from 'lodash/utility/uniqueId';
+// import uniqueId from 'lodash/utility/uniqueId';
 
 import React, { PropTypes } from 'react';
 import Leaflet from 'leaflet';
@@ -42,7 +42,7 @@ export default class Map extends MapComponent {
   componentWillMount() {
     this.element = React.createElement('div', {
       className: this.props.className,
-      style: this.props.style
+      style: this.props.style,
     });
     this.leafletElement = Leaflet.map(this.element, this.props);
   }
